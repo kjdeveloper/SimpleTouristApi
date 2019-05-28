@@ -25,6 +25,7 @@
         <module>mainmenu</module>
         <module>persistence</module>
         <module>service</module>
+        <module>email</module>
     </modules>
 
 

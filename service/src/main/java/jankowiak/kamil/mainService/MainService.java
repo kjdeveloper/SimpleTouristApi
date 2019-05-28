@@ -6,9 +6,9 @@ import jankowiak.kamil.enums.CountryForWeather;
 import jankowiak.kamil.exceptions.MyException;
 import jankowiak.kamil.model.DestinationCountry;
 import jankowiak.kamil.model.Homeland;
-import jankowiak.kamil.modelForNewsApi.NewsApi;
-import jankowiak.kamil.modelForNewsApi.NewsDetails;
-import jankowiak.kamil.modelForWeatherApi.WeatherApi;
+import jankowiak.kamil.newsModel.NewsApi;
+import jankowiak.kamil.newsModel.NewsDetails;
+import jankowiak.kamil.weatherModel.WeatherApi;
 
 import java.io.IOException;
 import java.math.BigDecimal;

@@ -1,4 +1,4 @@
-package jankowiak.kamil.modelForWeatherApi;
+package jankowiak.kamil.weatherModel;
 
 import java.util.List;
 import java.util.Objects;

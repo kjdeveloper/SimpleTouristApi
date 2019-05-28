@@ -1,4 +1,4 @@
-package jankowiak.kamil.modelForNewsApi;
+package jankowiak.kamil.newsModel;
 
 import java.util.List;
 import java.util.Objects;
