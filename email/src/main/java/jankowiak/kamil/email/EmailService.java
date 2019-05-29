@@ -1,29 +1,44 @@
 package jankowiak.kamil.email;
 
 import j2html.tags.Tag;
+import jankowiak.kamil.enums.CountryForWeather;
+import jankowiak.kamil.mainService.NewsService;
+import jankowiak.kamil.mainService.WeatherService;
+import jankowiak.kamil.model.DestinationCountry;
 
 import javax.mail.*;
+import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.util.List;
 import java.util.Properties;
-import java.util.stream.Collectors;
+
+import static j2html.TagCreator.*;
 
 public class EmailService {
 
-    private static final String emailAddress = "";
-    private static final String emailPassword = "";
-/*
-    private void send(String to, String title) {
+    private static final String emailAddress = "siwy247@gmail.com";
+    private static final String emailPassword = "aneczka247";
+
+    private void send(String to, String title, DestinationCountry destinationCountry) throws MessagingException {
         System.out.println("SENDING EMAIL ...");
         Session session = createSession();
         MimeMessage mimeMessage = new MimeMessage(session);
-        prepareEmailMessage(mimeMessage, to, title, createOrderListLikeHtml(customer, html));
+        prepareEmailMessage(mimeMessage, to, title, createInformationsAboutDestinationCountry(destinationCountry));
         Transport.send(mimeMessage);
         System.out.println("EMAIL SENT");
     }
 
-    private Tag createOrderListLikeHtml() {
-        return ;
+    private Tag createInformationsAboutDestinationCountry(DestinationCountry destinationCountry) {
+        NewsService newsService = new NewsService();
+        WeatherService weatherService = new WeatherService();
+        return html(
+                body(
+                        h1("Weather in " + destinationCountry.getName()),
+                        p(weatherService.getWeatherInformation(CountryForWeather.valueOf(destinationCountry.getName())).toString()),
+
+                        h1("News in " + destinationCountry.getName()),
+                        p(newsService.toString())
+                )
+        );
     }
 
     private void prepareEmailMessage(MimeMessage mimeMessage, String to, String title, Tag html) throws MessagingException {
@@ -31,7 +46,7 @@ public class EmailService {
         mimeMessage.setFrom(new InternetAddress(emailAddress));
         mimeMessage.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
         mimeMessage.setSubject(title);
-    }*/
+    }
 
     private Session createSession() {
         Properties props = new Properties();
@@ -47,15 +62,15 @@ public class EmailService {
             }
         });
     }
-/*
-    public void sendEmail() {
+    public void sendEmail(String to, DestinationCountry destinationCountry) {
 
         try {
-            send("kamiljankowiak247@gmail.com", "Order", customer, orderList);
+            send(to, destinationCountry.getName(), destinationCountry);
         } catch (
                 MessagingException e) {
             e.printStackTrace();
         }
-    }*/
+    }
+
 
 }

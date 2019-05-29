@@ -75,6 +75,11 @@ public class NewsService {
         }
         return httpResponse;
     }
+
+    @Override
+    public String toString() {
+        return mapWithInformationDetails + "";
+    }
 }
 
 

@@ -19,6 +19,9 @@ public class MainService {
     private Homeland homeland;
     private DestinationCountry destinationCountry;
 
+    public MainService() {
+    }
+
     public MainService(Homeland homeland, DestinationCountry destinationCountry) {
         this.homeland = homeland;
         this.destinationCountry = destinationCountry;
@@ -35,15 +38,7 @@ public class MainService {
         }
         return gson.fromJson(currencyConverter.body(), CurMain.class);
     }
-
-    private static boolean testForCurrencyConverter() {
-        System.out.println("\nWould you like to see the current exchange rate? [yes/no]");
-        String answer = sc.next();
-        if (answer.equalsIgnoreCase("yes")) {
-            return true;
-        }
-        return false;
-    }*/
+*/
 
     private static boolean testForSendingEmail() {
         System.out.println("\nWould you like to get an e-mail with the information you have just read? [yes/no]");
@@ -61,9 +56,8 @@ public class MainService {
         WeatherApi weatherMain = weatherService.getWeatherInformation(CountryForWeather.valueOf(destinationCountry.getName()));
         System.out.println(weatherMain);
 
-       /* boolean testForCurrency = testForCurrencyConverter();
-        if (testForCurrency) {
-            System.out.println("\nWhat amount do you want to convert?");
+        /*
+            System.out.println("\nWhat amount you want to convert?");
             BigDecimal amount = sc.nextBigDecimal();
             CurMain currencyApi = getCurrencyConverter(amount);
             System.out.println(currencyApi);
