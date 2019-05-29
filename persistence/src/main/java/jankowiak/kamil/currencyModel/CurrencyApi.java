@@ -1,36 +1,37 @@
 package jankowiak.kamil.currencyModel;
 
-import java.util.List;
 import java.util.Objects;
 
 public class CurrencyApi {
 
-    private List<Query> query;
-    private List<Info> info;
+    private boolean success;
+    private Query query;
+    private Info info;
     private String result;
 
     public CurrencyApi() {
     }
 
-    public CurrencyApi(List<Query> query, List<Info> info, String result) {
+    public CurrencyApi(boolean success, Query query, Info info, String result) {
+        this.success = success;
         this.query = query;
         this.info = info;
         this.result = result;
     }
 
-    public List<Query> getQuery() {
+    public Query getQuery() {
         return query;
     }
 
-    public void setQuery(List<Query> query) {
+    public void setQuery(Query query) {
         this.query = query;
     }
 
-    public List<Info> getInfo() {
+    public Info getInfo() {
         return info;
     }
 
-    public void setInfo(List<Info> info) {
+    public void setInfo(Info info) {
         this.info = info;
     }
 
@@ -42,19 +43,28 @@ public class CurrencyApi {
         this.result = result;
     }
 
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CurrencyApi that = (CurrencyApi) o;
-        return Objects.equals(query, that.query) &&
+        return success == that.success &&
+                Objects.equals(query, that.query) &&
                 Objects.equals(info, that.info) &&
                 Objects.equals(result, that.result);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(query, info, result);
+        return Objects.hash(success, query, info, result);
     }
 
     @Override

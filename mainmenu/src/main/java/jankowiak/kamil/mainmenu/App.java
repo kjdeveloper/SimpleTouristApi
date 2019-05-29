@@ -2,11 +2,10 @@ package jankowiak.kamil.mainmenu;
 
 import jankowiak.kamil.enums.Currency;
 import jankowiak.kamil.mainService.MainService;
+import jankowiak.kamil.mainService.NewsService;
 import jankowiak.kamil.model.DestinationCountry;
 import jankowiak.kamil.model.Homeland;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
 
 public class App {
 
@@ -17,7 +16,6 @@ public class App {
         MainService mainService = new MainService(homeland, destinationCountry);
 
         mainService.getAllInformationAboutDestinationCountry();
-
 
 
     }

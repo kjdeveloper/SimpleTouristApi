@@ -1,23 +1,25 @@
 package jankowiak.kamil.currencyModel;
 
+import java.math.BigDecimal;
+import java.util.List;
 import java.util.Objects;
 
 public class Info {
 
-    private String rate;
+    private double rate;
 
     public Info() {
     }
 
-    public Info(String rate) {
+    public Info(double rate) {
         this.rate = rate;
     }
 
-    public String getRate() {
+    public double getRate() {
         return rate;
     }
 
-    public void setRate(String rate) {
+    public void setRate(double rate) {
         this.rate = rate;
     }
 
@@ -26,7 +28,7 @@ public class Info {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Info info = (Info) o;
-        return Objects.equals(rate, info.rate);
+        return Double.compare(info.rate, rate) == 0;
     }
 
     @Override
@@ -37,7 +39,7 @@ public class Info {
     @Override
     public String toString() {
         return "Info{" +
-                "rate='" + rate + '\'' +
+                "rate=" + rate +
                 '}';
     }
 }

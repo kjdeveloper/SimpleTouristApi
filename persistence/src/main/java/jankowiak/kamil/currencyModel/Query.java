@@ -1,6 +1,7 @@
 package jankowiak.kamil.currencyModel;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Objects;
 
 public class Query {
@@ -46,10 +47,10 @@ public class Query {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Query that = (Query) o;
-        return Objects.equals(from, that.from) &&
-                Objects.equals(to, that.to) &&
-                Objects.equals(amount, that.amount);
+        Query query = (Query) o;
+        return Objects.equals(from, query.from) &&
+                Objects.equals(to, query.to) &&
+                Objects.equals(amount, query.amount);
     }
 
     @Override
