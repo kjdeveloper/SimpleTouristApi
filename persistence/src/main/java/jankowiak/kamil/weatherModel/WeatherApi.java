@@ -37,6 +37,6 @@ public class WeatherApi {
 
     @Override
     public String toString() {
-        return "WeatherApi: " + data;
+        return "" + data;
     }
 }

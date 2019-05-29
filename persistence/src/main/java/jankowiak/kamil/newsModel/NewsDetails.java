@@ -9,7 +9,6 @@ public class NewsDetails {
     private URL url;
     private String description;
 
-
     public NewsDetails() {
     }
 
@@ -61,8 +60,8 @@ public class NewsDetails {
     @Override
     public String toString() {
         return "NewsDetails: " +
-                "title='" + title +
-                ", url=" + url +
-                ", description='" + description;
+                "title: " + title +
+                ", url: " + url +
+                ", description: " + description;
     }
 }

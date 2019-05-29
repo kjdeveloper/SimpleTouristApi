@@ -5,9 +5,12 @@ import jankowiak.kamil.mainService.MainService;
 import jankowiak.kamil.model.DestinationCountry;
 import jankowiak.kamil.model.Homeland;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+
 public class App {
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
 
         Homeland homeland = new Homeland("POLAND","Varsaw", Currency.PLN);
         DestinationCountry destinationCountry = new DestinationCountry("UNITED_KINGDOM", "London", Currency.GBP);

@@ -92,11 +92,11 @@ public class WeatherDetails {
     @Override
     public String toString() {
         return "Weather details: " +
-                "city name: " + city_name + '\'' +
-                ", ob time: " + ob_time + '\'' +
-                ", uv: " + uv + '\'' +
+                "city name: " + city_name +
+                ", ob time: " + ob_time +
+                ", uv: " + uv +
                 ", pressure: " + pres +
-                ", sunset: " + sunset + '\'' +
+                ", sunset: " + sunset +
                 ", temp: " + temp;
     }
 }

@@ -5,21 +5,21 @@ import java.util.Objects;
 
 public class NewsApi {
 
-    private List<NewsDetails> newsDetails;
+    private List<NewsDetails> value;
 
     public NewsApi() {
     }
 
-    public NewsApi(List<NewsDetails> newsDetails) {
-        this.newsDetails = newsDetails;
+    public NewsApi(List<NewsDetails> value) {
+        this.value = value;
     }
 
-    public List<NewsDetails> getNewsDetails() {
-        return newsDetails;
+    public List<NewsDetails> getValue() {
+        return value;
     }
 
-    public void setNewsDetails(List<NewsDetails> newsDetails) {
-        this.newsDetails = newsDetails;
+    public void setValue(List<NewsDetails> value) {
+        this.value = value;
     }
 
     @Override
@@ -27,16 +27,16 @@ public class NewsApi {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         NewsApi newsApi = (NewsApi) o;
-        return Objects.equals(newsDetails, newsApi.newsDetails);
+        return Objects.equals(value, newsApi.value);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(newsDetails);
+        return Objects.hash(value);
     }
 
     @Override
     public String toString() {
-        return "NewsApi => " + newsDetails;
+        return "NewsApi => " + value;
     }
 }
