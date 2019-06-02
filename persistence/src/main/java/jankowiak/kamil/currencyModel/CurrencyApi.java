@@ -4,75 +4,40 @@ import java.util.Objects;
 
 public class CurrencyApi {
 
-    private boolean success;
-    private Query query;
-    private Info info;
-    private String result;
+    private CurrencyDetails info;
 
     public CurrencyApi() {
     }
 
-    public CurrencyApi(boolean success, Query query, Info info, String result) {
-        this.success = success;
-        this.query = query;
+    public CurrencyApi(CurrencyDetails info) {
         this.info = info;
-        this.result = result;
     }
 
-    public Query getQuery() {
-        return query;
-    }
-
-    public void setQuery(Query query) {
-        this.query = query;
-    }
-
-    public Info getInfo() {
+    public CurrencyDetails getInfo() {
         return info;
     }
 
-    public void setInfo(Info info) {
+    public void setInfo(CurrencyDetails info) {
         this.info = info;
-    }
-
-    public String getResult() {
-        return result;
-    }
-
-    public void setResult(String result) {
-        this.result = result;
-    }
-
-    public boolean isSuccess() {
-        return success;
-    }
-
-    public void setSuccess(boolean success) {
-        this.success = success;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CurrencyApi that = (CurrencyApi) o;
-        return success == that.success &&
-                Objects.equals(query, that.query) &&
-                Objects.equals(info, that.info) &&
-                Objects.equals(result, that.result);
+        CurrencyApi currencyApi = (CurrencyApi) o;
+        return Objects.equals(info, currencyApi.info);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(success, query, info, result);
+        return Objects.hash(info);
     }
 
     @Override
     public String toString() {
         return "CurrencyApi{" +
-                "query=" + query +
-                ", info=" + info +
-                ", result='" + result + '\'' +
+                "info=" + info +
                 '}';
     }
 }

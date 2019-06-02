@@ -1,7 +1,5 @@
 package jankowiak.kamil.currencyModel;
 
-import java.math.BigDecimal;
-import java.util.List;
 import java.util.Objects;
 
 public class Info {

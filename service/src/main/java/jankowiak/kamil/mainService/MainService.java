@@ -28,7 +28,7 @@ public class MainService {
     }
 
     /*  //https://rapidapi.com/fixer/api/fixer-currency?endpoint=5c119732e4b09c6b17cfa312
-    private CurMain getCurrencyConverter(final BigDecimal amount){
+    private CurrencyApi getCurrencyConverter(final BigDecimal amount){
         HttpResponse<String> currencyConverter;
         try {
             String pathForCurrencyConverter = "https://fixer-fixer-currency-v1.p.rapidapi.com/convert?from="+destinationCountry.getCurrency()+"&to="+homeland.getCurrency()+"&amount="+amount;
@@ -36,7 +36,7 @@ public class MainService {
         }catch (Exception e){
             throw new MyException("Something wrong with currency converter");
         }
-        return gson.fromJson(currencyConverter.body(), CurMain.class);
+        return gson.fromJson(currencyConverter.body(), CurrencyApi.class);
     }
 */
 
@@ -59,7 +59,7 @@ public class MainService {
         /*
             System.out.println("\nWhat amount you want to convert?");
             BigDecimal amount = sc.nextBigDecimal();
-            CurMain currencyApi = getCurrencyConverter(amount);
+            CurrencyApi currencyApi = getCurrencyConverter(amount);
             System.out.println(currencyApi);
         }*/
 
