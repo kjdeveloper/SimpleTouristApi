@@ -1,7 +1,6 @@
 package jankowiak.kamil.email;
 
 import j2html.tags.ContainerTag;
-import j2html.tags.Tag;
 import jankowiak.kamil.enums.CountryForWeather;
 import jankowiak.kamil.mainService.NewsService;
 import jankowiak.kamil.mainService.WeatherService;
@@ -10,7 +9,10 @@ import jankowiak.kamil.model.DestinationCountry;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.net.URL;
+import java.util.Map;
 import java.util.Properties;
+import java.util.stream.Collectors;
 
 import static j2html.TagCreator.*;
 
@@ -28,15 +30,24 @@ public class EmailService {
         System.out.println("EMAIL SENT");
     }
 
-
     private String createInformationsAboutDestinationCountry(DestinationCountry destinationCountry) {
         NewsService newsService = new NewsService();
         WeatherService weatherService = new WeatherService();
 
         ContainerTag html = html().attr("lang", "en").with(
-                body().with(
-                        header().with(h1(destinationCountry.getName()))
-                )
+                body()
+                        .with(
+                                header().with(h1(destinationCountry.getName())))
+                        .with(
+                                header().with(h2("Weather for " + destinationCountry.getName() + " " + weatherService.getWeatherInformation(CountryForWeather.valueOf(destinationCountry.getName())).getData()))
+                        )
+                        .with(
+                                header().with(h2("News from " + destinationCountry.getName() + "\n " + newsService.getMapWithInformationDetails()
+                                        .entrySet()
+                                        .stream()
+                                        .map(k -> k.getKey() + " =>  " + k.getValue())
+                                        .collect(Collectors.toList())))
+                        )
         );
 
         return html.render();

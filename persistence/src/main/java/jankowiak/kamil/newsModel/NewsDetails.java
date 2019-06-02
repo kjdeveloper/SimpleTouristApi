@@ -61,7 +61,7 @@ public class NewsDetails {
     public String toString() {
         return "NewsDetails: " +
                 "title: " + title +
-                ", url: " + url +
+                "\n url: " + url +
                 ", description: " + description;
     }
 }

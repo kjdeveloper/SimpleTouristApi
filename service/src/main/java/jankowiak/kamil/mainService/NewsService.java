@@ -45,7 +45,7 @@ public class NewsService {
                             LinkedHashMap::new
                     ));
         } catch (Exception e) {
-            throw new MyException("Something wrong with informations");
+            throw new MyException("Something wrong with informations map");
         }
 
         return mapWithInformationDetails;
@@ -71,14 +71,14 @@ public class NewsService {
                     .build()
                     .send(requestGetForRapidApi(path), HttpResponse.BodyHandlers.ofString());
         } catch (Exception e) {
-            throw new MyException("Something goes wrong with weather");
+            throw new MyException("Something wrong with informations response");
         }
         return httpResponse;
     }
 
     @Override
     public String toString() {
-        return mapWithInformationDetails + "";
+        return mapWithInformationDetails + "\n";
     }
 }
 

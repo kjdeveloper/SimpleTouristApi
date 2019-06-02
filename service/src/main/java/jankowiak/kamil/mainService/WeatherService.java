@@ -12,10 +12,8 @@ import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.Scanner;
 
 public class WeatherService {
-
 
     private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
@@ -38,7 +36,7 @@ public class WeatherService {
                     .build()
                     .send(requestGetForRapidApi(path), HttpResponse.BodyHandlers.ofString());
         } catch (Exception e) {
-            throw new MyException("Something goes wrong with weather");
+            throw new MyException("Something wrong with weather response");
         }
         return httpResponse;
     }
