@@ -10,8 +10,6 @@ import jankowiak.kamil.weatherModel.WeatherApi;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.net.URL;
-import java.util.Map;
 import java.util.Properties;
 import java.util.stream.Collectors;
 
