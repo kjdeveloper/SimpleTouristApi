@@ -37,6 +37,10 @@ public class WeatherApi {
 
     @Override
     public String toString() {
-        return "" + data;
+        return "Ob Time" + data.get(0).getCity_name() +
+         "UV" + data.get(0).getUv()  +
+         "Pressure" + data.get(0).getPres()  +
+         "Sunset" + data.get(0).getSunset() +
+         "Temperature" + data.get(0).getTemp() + ".";
     }
 }

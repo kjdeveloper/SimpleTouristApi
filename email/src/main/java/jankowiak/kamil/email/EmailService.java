@@ -5,6 +5,7 @@ import jankowiak.kamil.enums.CountryForWeather;
 import jankowiak.kamil.mainService.NewsService;
 import jankowiak.kamil.mainService.WeatherService;
 import jankowiak.kamil.model.DestinationCountry;
+import jankowiak.kamil.weatherModel.WeatherApi;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -32,17 +33,24 @@ public class EmailService {
 
     private String createInformationsAboutDestinationCountry(DestinationCountry destinationCountry) {
         NewsService newsService = new NewsService();
-        WeatherService weatherService = new WeatherService();
+        WeatherApi weatherService = new WeatherService().getWeatherInformation(CountryForWeather.valueOf(destinationCountry.getName()));
 
         ContainerTag html = html().attr("lang", "en").with(
                 body()
                         .with(
                                 header().with(h1(destinationCountry.getName())))
                         .with(
-                                header().with(h2("Weather for " + destinationCountry.getName() + " " + weatherService.getWeatherInformation(CountryForWeather.valueOf(destinationCountry.getName())).getData()))
-                        )
+                                header().with(h1("Weather for city: " + weatherService.getData().get(0).getCity_name())))
                         .with(
-                                header().with(h2("News from " + destinationCountry.getName() + "\n " + newsService.getMapWithInformationDetails()
+                                header().with(h3("\n Sunset at: " + weatherService.getData().get(0).getSunset() + " pm.")))
+                        .with(
+                                header().with(h3("\n Temperature: " + weatherService.getData().get(0).getTemp() + " deg. C")))
+                        .with(
+                                header().with(h3("\n Pressure: " + weatherService.getData().get(0).getPres() + " hPa")))
+                        .with(
+                                header().with(h3("\n UV: " + weatherService.getData().get(0).getUv())))
+                        .with(
+                                header().with(h3("\n " + newsService.getMapWithInformationDetails()
                                         .entrySet()
                                         .stream()
                                         .map(k -> k.getKey() + " =>  " + k.getValue())
