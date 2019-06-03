@@ -19,8 +19,8 @@ import static j2html.TagCreator.*;
 
 public class EmailService {
 
-    private static final String emailAddress = "siwy247@gmail.com";
-    private static final String emailPassword = "aneczka247";
+    private static final String emailAddress = "";
+    private static final String emailPassword = "";
 
     private void send(String to, String title, DestinationCountry destinationCountry) throws MessagingException {
         System.out.println("SENDING EMAIL ...");
@@ -38,7 +38,7 @@ public class EmailService {
         ContainerTag html = html().attr("lang", "en").with(
                 body()
                         .with(
-                                header().with(h1(destinationCountry.getName())))
+                                header().with(h1(destinationCountry.getName() + " best place to travel <3")))
                         .with(
                                 header().with(h1("Weather for city: " + weatherService.getData().get(0).getCity_name())))
                         .with(
@@ -50,7 +50,7 @@ public class EmailService {
                         .with(
                                 header().with(h3("\n UV: " + weatherService.getData().get(0).getUv())))
                         .with(
-                                header().with(h3("\n " + newsService.getMapWithInformationDetails()
+                                header().with(h3("Daily informations: \n " + newsService.getMapWithInformationDetails()
                                         .entrySet()
                                         .stream()
                                         .map(k -> k.getKey() + " =>  " + k.getValue())
