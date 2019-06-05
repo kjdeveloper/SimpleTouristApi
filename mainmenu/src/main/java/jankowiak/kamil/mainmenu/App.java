@@ -9,13 +9,13 @@ import jankowiak.kamil.model.Homeland;
 
 public class App {
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
-        Homeland homeland = new Homeland("POLAND","Varsaw", Currency.PLN);
+        Homeland homeland = new Homeland("POLAND", "Varsaw", Currency.PLN);
         DestinationCountry destinationCountry = new DestinationCountry("UNITED_KINGDOM", "London", Currency.GBP);
-        //MainService mainService = new MainService(homeland, destinationCountry);
+        /*MainService mainService = new MainService(homeland, destinationCountry);
 
-        //mainService.getAllInformationAboutDestinationCountry();
+        mainService.getAllInformationAboutDestinationCountry();*/
 
         EmailService emailService = new EmailService();
         emailService.sendEmail("kamiljankowiak247@gmail.com", destinationCountry);

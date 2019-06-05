@@ -24,9 +24,10 @@ public class NewsService {
     private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
     private Map<String, URL> mapWithInformationDetails;
 
-    private DestinationCountry destinationCountry = new DestinationCountry();
+    private DestinationCountry destinationCountry;
 
-    public NewsService() {
+    public NewsService(DestinationCountry destinationCountry) {
+        this.destinationCountry = destinationCountry;
         this.mapWithInformationDetails = getMapWithInformationDetails();
     }
 

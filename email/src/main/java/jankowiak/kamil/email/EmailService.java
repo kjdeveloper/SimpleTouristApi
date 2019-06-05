@@ -10,8 +10,8 @@ import jankowiak.kamil.weatherModel.WeatherApi;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.util.Properties;
-import java.util.stream.Collectors;
+import java.net.URL;
+import java.util.*;
 
 import static j2html.TagCreator.*;
 
@@ -29,9 +29,21 @@ public class EmailService {
         System.out.println("EMAIL SENT");
     }
 
+    private List<String> changeMapIntoInformations(Map<String, URL> map) {
+        List<String> listOfInformations = new ArrayList<>();
+
+        for (String info : map.keySet()) {
+            listOfInformations.add(info + " => " + map.get((map.keySet().toArray())[0]));
+        }
+        return listOfInformations;
+    }
+
     private String createInformationsAboutDestinationCountry(DestinationCountry destinationCountry) {
-        NewsService newsService = new NewsService();
+        Map<String, URL> newsService = new NewsService(destinationCountry).getMapWithInformationDetails();
         WeatherApi weatherService = new WeatherService().getWeatherInformation(CountryForWeather.valueOf(destinationCountry.getName()));
+
+        List<String> listOfInformations = changeMapIntoInformations(newsService);
+
 
         ContainerTag html = html().attr("lang", "en").with(
                 body()
@@ -48,12 +60,11 @@ public class EmailService {
                         .with(
                                 header().with(h3("\n UV: " + weatherService.getData().get(0).getUv())))
                         .with(
-                                header().with(h3("Daily informations: \n " + newsService.getMapWithInformationDetails()
-                                        .entrySet()
-                                        .stream()
-                                        .map(k -> k.getKey() + " =>  " + k.getValue())
-                                        .collect(Collectors.toList())))
-                        )
+                                header().with(h4(listOfInformations.get(0)))),
+                                header().with(h4(listOfInformations.get(1))),
+                                header().with(h4(listOfInformations.get(2))),
+                                header().with(h4(listOfInformations.get(3))),
+                                header().with(h4(listOfInformations.get(4)))
         );
 
         return html.render();
