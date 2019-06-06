@@ -39,7 +39,7 @@ public class EmailService {
     }
 
     private String createInformationsAboutDestinationCountry(DestinationCountry destinationCountry) {
-        Map<String, URL> newsService = new NewsService(destinationCountry).getMapWithInformationDetails();
+        Map<String, URL> newsService = new NewsService().getMapWithInformationDetails(destinationCountry);
         WeatherApi weatherService = new WeatherService().getWeatherInformation(CountryForWeather.valueOf(destinationCountry.getName()));
 
         List<String> listOfInformations = changeMapIntoInformations(newsService);

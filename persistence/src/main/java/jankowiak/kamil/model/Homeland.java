@@ -1,6 +1,6 @@
 package jankowiak.kamil.model;
 
-import jankowiak.kamil.enums.Currency;
+import jankowiak.kamil.enums.CountryForCurrencyConverter;
 
 import java.util.Objects;
 
@@ -8,15 +8,15 @@ public class Homeland {
 
     private String name;
     private String capital;
-    private Currency currency;
+    private CountryForCurrencyConverter countryForCurrencyConverter;
 
     public Homeland() {
     }
 
-    public Homeland(String name, String capital, Currency currency) {
+    public Homeland(String name, String capital, CountryForCurrencyConverter countryForCurrencyConverter) {
         this.name = name;
         this.capital = capital;
-        this.currency = currency;
+        this.countryForCurrencyConverter = countryForCurrencyConverter;
     }
 
     public String getName() {
@@ -35,12 +35,12 @@ public class Homeland {
         this.capital = capital;
     }
 
-    public Currency getCurrency() {
-        return currency;
+    public CountryForCurrencyConverter getCountryForCurrencyConverter() {
+        return countryForCurrencyConverter;
     }
 
-    public void setCurrency(Currency currency) {
-        this.currency = currency;
+    public void setCountryForCurrencyConverter(CountryForCurrencyConverter countryForCurrencyConverter) {
+        this.countryForCurrencyConverter = countryForCurrencyConverter;
     }
 
     @Override
@@ -50,12 +50,12 @@ public class Homeland {
         Homeland homeland = (Homeland) o;
         return Objects.equals(name, homeland.name) &&
                 Objects.equals(capital, homeland.capital) &&
-                currency == homeland.currency;
+                countryForCurrencyConverter == homeland.countryForCurrencyConverter;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, capital, currency);
+        return Objects.hash(name, capital, countryForCurrencyConverter);
     }
 
     @Override
@@ -63,7 +63,7 @@ public class Homeland {
         return "Homeland{" +
                 "name='" + name + '\'' +
                 ", capital='" + capital + '\'' +
-                ", currency=" + currency +
+                ", countryForCurrencyConverter=" + countryForCurrencyConverter +
                 '}';
     }
 }

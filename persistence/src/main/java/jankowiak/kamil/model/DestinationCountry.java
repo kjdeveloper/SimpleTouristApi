@@ -1,7 +1,7 @@
 package jankowiak.kamil.model;
 
 
-import jankowiak.kamil.enums.Currency;
+import jankowiak.kamil.enums.CountryForCurrencyConverter;
 
 import java.util.Objects;
 
@@ -9,15 +9,15 @@ public class DestinationCountry {
 
     private String name;
     private String city;
-    private Currency currency;
+    private CountryForCurrencyConverter countryForCurrencyConverter;
 
     public DestinationCountry() {
     }
 
-    public DestinationCountry(String name, String city, Currency currency) {
+    public DestinationCountry(String name, String city, CountryForCurrencyConverter countryForCurrencyConverter) {
         this.name = name;
         this.city = city;
-        this.currency = currency;
+        this.countryForCurrencyConverter = countryForCurrencyConverter;
     }
 
     public String getName() {
@@ -36,12 +36,12 @@ public class DestinationCountry {
         this.city = city;
     }
 
-    public Currency getCurrency() {
-        return currency;
+    public CountryForCurrencyConverter getCountryForCurrencyConverter() {
+        return countryForCurrencyConverter;
     }
 
-    public void setCurrency(Currency currency) {
-        this.currency = currency;
+    public void setCountryForCurrencyConverter(CountryForCurrencyConverter countryForCurrencyConverter) {
+        this.countryForCurrencyConverter = countryForCurrencyConverter;
     }
 
     @Override
@@ -51,12 +51,12 @@ public class DestinationCountry {
         DestinationCountry that = (DestinationCountry) o;
         return Objects.equals(name, that.name) &&
                 Objects.equals(city, that.city) &&
-                currency == that.currency;
+                countryForCurrencyConverter == that.countryForCurrencyConverter;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, city, currency);
+        return Objects.hash(name, city, countryForCurrencyConverter);
     }
 
     @Override
@@ -64,7 +64,7 @@ public class DestinationCountry {
         return "DestinationCountry{" +
                 "name='" + name + '\'' +
                 ", city='" + city + '\'' +
-                ", currency=" + currency +
+                ", countryForCurrencyConverter=" + countryForCurrencyConverter +
                 '}';
     }
 }

@@ -1,13 +1,10 @@
 package jankowiak.kamil.mainService;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import jankowiak.kamil.exceptions.MyException;
 import jankowiak.kamil.model.DestinationCountry;
 import jankowiak.kamil.newsModel.NewsApi;
 import jankowiak.kamil.newsModel.NewsDetails;
 
-import java.io.IOException;
 import java.net.ProxySelector;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -19,19 +16,11 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class NewsService {
+public class NewsService implements IResponseForApi {
 
-    private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
     private Map<String, URL> mapWithInformationDetails;
 
-    private DestinationCountry destinationCountry;
-
-    public NewsService(DestinationCountry destinationCountry) {
-        this.destinationCountry = destinationCountry;
-        this.mapWithInformationDetails = getMapWithInformationDetails();
-    }
-
-    public Map<String, URL> getMapWithInformationDetails() {
+    public Map<String, URL> getMapWithInformationDetails(DestinationCountry destinationCountry) {
         String pathWebNews = "https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/NewsSearchAPI?autoCorrect=true&pageNumber=1&pageSize=10&q=" + destinationCountry.getName() + "&safeSearch=false";
 
         try {
@@ -52,18 +41,29 @@ public class NewsService {
         return mapWithInformationDetails;
     }
 
-    private static HttpRequest requestGetForRapidApi(final String path) throws URISyntaxException {
-
-        return HttpRequest.newBuilder()
-                .uri(new URI(path))
-                .header("X-RapidAPI-Key", "c3d04280ddmsh1c2d1143079affcp1be4f5jsn42acd93c4536")
-                .version(HttpClient.Version.HTTP_2)
-                .GET()
-                .build();
+    @Override
+    public String toString() {
+        return mapWithInformationDetails + "\n";
     }
 
-    private static HttpResponse<String> getResponse(final String path) {
+    @Override
+    public HttpRequest requestGetForRapidApi(String path) {
+        HttpRequest httpRequest = null;
+        try {
+            httpRequest = HttpRequest.newBuilder()
+                    .uri(new URI(path))
+                    .header("X-RapidAPI-Key", "c3d04280ddmsh1c2d1143079affcp1be4f5jsn42acd93c4536")
+                    .version(HttpClient.Version.HTTP_2)
+                    .GET()
+                    .build();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        return httpRequest;
+    }
 
+    @Override
+    public HttpResponse<String> getResponse(String path) {
         HttpResponse<String> httpResponse;
         try {
             httpResponse = HttpClient
@@ -75,11 +75,6 @@ public class NewsService {
             throw new MyException("Something wrong with informations response");
         }
         return httpResponse;
-    }
-
-    @Override
-    public String toString() {
-        return mapWithInformationDetails + "\n";
     }
 }
 

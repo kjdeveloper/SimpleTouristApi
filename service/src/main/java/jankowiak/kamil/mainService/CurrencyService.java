@@ -1,9 +1,10 @@
 package jankowiak.kamil.mainService;
 
-import jankowiak.kamil.enums.CountryForWeather;
+import jankowiak.kamil.currencyModel.CurrencyConverterResponse;
+import jankowiak.kamil.enums.CountryForCurrencyConverter;
 import jankowiak.kamil.exceptions.MyException;
-import jankowiak.kamil.weatherModel.WeatherApi;
 
+import java.math.BigDecimal;
 import java.net.ProxySelector;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -11,16 +12,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-public class WeatherService implements IResponseForApi {
-
-    public WeatherApi getWeatherInformation(CountryForWeather countryForWeather) {
-
-        String pathForWeather = "https://weatherbit-v1-mashape.p.rapidapi.com/current?lang=en&lon=" + countryForWeather.getLongitude() + "&lat=" + countryForWeather.getLatitude() + "";
-        HttpResponse<String> weather = getResponse(pathForWeather);
-
-        return gson.fromJson(weather.body(), WeatherApi.class);
-
-    }
+public class CurrencyService implements IResponseForApi {
 
     @Override
     public HttpRequest requestGetForRapidApi(String path) {
@@ -35,7 +27,6 @@ public class WeatherService implements IResponseForApi {
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
-
         return httpRequest;
     }
 
@@ -49,8 +40,24 @@ public class WeatherService implements IResponseForApi {
                     .build()
                     .send(requestGetForRapidApi(path), HttpResponse.BodyHandlers.ofString());
         } catch (Exception e) {
-            throw new MyException("Something wrong with weather response");
+            throw new MyException("Something wrong with informations response");
         }
         return httpResponse;
     }
+
+    public CurrencyConverterResponse getCurrencyConverter(CountryForCurrencyConverter from, CountryForCurrencyConverter to, BigDecimal amount){
+        String pathForCurrencyConverter = "https://fixer-fixer-currency-v1.p.rapidapi.com/convert?from="+from.name()+"&to="+to.name()+"&amount="+amount;
+        CurrencyConverterResponse currencyConvert = null;
+        try {
+            HttpResponse<String> newsResponse = getResponse(pathForCurrencyConverter);
+            currencyConvert = gson.fromJson(newsResponse.body(), CurrencyConverterResponse.class);
+
+        } catch (Exception e) {
+            throw new MyException("Something wrong with currency converter");
+        }
+
+        return currencyConvert;
+    }
+
+
 }
