@@ -1,6 +1,5 @@
 package jankowiak.kamil.model;
 
-
 import jankowiak.kamil.enums.CountryForCurrencyConverter;
 
 import java.util.Objects;
