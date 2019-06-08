@@ -1,9 +1,7 @@
 package jankowiak.kamil.mainService;
 
 import jankowiak.kamil.currencyModel.CurrencyConverterApi;
-import jankowiak.kamil.destinationCountryInfoModel.DestinationCountryInformationsApi;
 import jankowiak.kamil.enums.CountryForWeather;
-import jankowiak.kamil.jokeModel.Category;
 import jankowiak.kamil.jokeModel.JokeApi;
 import jankowiak.kamil.model.DestinationCountry;
 import jankowiak.kamil.model.Homeland;
@@ -44,9 +42,9 @@ public class MainService {
         return false;
     }
 
-    private DestinationCountryInformationsApi getInformationsAboutDestinationCountry(){
-        return destinationCountryInfoService.getInfoAboutDestinationCountry(destinationCountry);
-    }
+ /*   private DestinationINFOS getInformationsAboutDestinationCountry(){
+
+    }*/
 
     private WeatherApi getWeather(){
         System.out.println("Weather in " + destinationCountry.getName());
@@ -72,8 +70,6 @@ public class MainService {
 
     public void getAllInformationAboutDestinationCountry() {
 
-        DestinationCountryInformationsApi destinationCountryInformationsApi = getInformationsAboutDestinationCountry();
-        System.out.println(destinationCountryInformationsApi);
         /*
         WeatherApi weatherApi = getWeather();
         System.out.println(weatherApi.getData());

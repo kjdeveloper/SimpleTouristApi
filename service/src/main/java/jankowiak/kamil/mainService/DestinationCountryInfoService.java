@@ -1,6 +1,5 @@
 package jankowiak.kamil.mainService;
 
-import jankowiak.kamil.destinationCountryInfoModel.DestinationCountryInformationsApi;
 import jankowiak.kamil.exceptions.MyException;
 import jankowiak.kamil.model.DestinationCountry;
 
@@ -13,14 +12,14 @@ import java.net.http.HttpResponse;
 
 public class DestinationCountryInfoService implements IResponseForApi {
 
-    public DestinationCountryInformationsApi getInfoAboutDestinationCountry(DestinationCountry destinationCountry) {
+  /*  public String getInfoAboutDestinationCountry(DestinationCountry destinationCountry) {
         String destinationCountryAfterValidation = destinationCountryValidation(destinationCountry.getName());
         String pathForInfo = "https://restcountries-v1.p.rapidapi.com/name/" + destinationCountryAfterValidation;
 
         HttpResponse<String> infoResponse = getResponse(pathForInfo);
         System.out.println(infoResponse.body());
-        return gson.fromJson(infoResponse.body(), DestinationCountryInformationsApi.class);
-    }
+        return gson.fromJson(infoResponse.body(), );
+    }*/
 
     private String destinationCountryValidation(String destinationCountry) {
         if (destinationCountry.split(" ").length > 1) {
