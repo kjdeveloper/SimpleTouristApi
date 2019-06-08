@@ -1,10 +1,9 @@
 package jankowiak.kamil.mainService;
 
-import jankowiak.kamil.currencyModel.CurrencyConverterApi;
-import jankowiak.kamil.enums.CountryForCurrencyConverter;
 import jankowiak.kamil.exceptions.MyException;
+import jankowiak.kamil.jokeModel.Category;
+import jankowiak.kamil.jokeModel.JokeApi;
 
-import java.math.BigDecimal;
 import java.net.ProxySelector;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -12,7 +11,15 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-public class CurrencyService implements IResponseForApi {
+public class JokeService implements IResponseForApi {
+
+
+    public JokeApi getJoke() {
+        String pathForJoke = "https://jokeapi.p.rapidapi.com/category/Any?format=json4";
+
+        HttpResponse<String> jokeResponse = getResponse(pathForJoke);
+        return gson.fromJson(jokeResponse.body(), JokeApi.class);
+    }
 
     @Override
     public HttpRequest requestGetForRapidApi(String path) {
@@ -44,20 +51,4 @@ public class CurrencyService implements IResponseForApi {
         }
         return httpResponse;
     }
-
-    public CurrencyConverterApi getCurrencyConverter(CountryForCurrencyConverter from, CountryForCurrencyConverter to, BigDecimal amount){
-        String pathForCurrencyConverter = "https://fixer-fixer-currency-v1.p.rapidapi.com/convert?from="+from.name()+"&to="+to.name()+"&amount="+amount;
-        CurrencyConverterApi currencyConvert = null;
-        try {
-            HttpResponse<String> newsResponse = getResponse(pathForCurrencyConverter);
-            currencyConvert = gson.fromJson(newsResponse.body(), CurrencyConverterApi.class);
-
-        } catch (Exception e) {
-            throw new MyException("Something wrong with currency converter");
-        }
-
-        return currencyConvert;
-    }
-
-
 }

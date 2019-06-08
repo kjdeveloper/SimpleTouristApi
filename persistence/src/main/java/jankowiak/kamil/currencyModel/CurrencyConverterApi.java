@@ -1,6 +1,6 @@
 package jankowiak.kamil.currencyModel;
 
-public class CurrencyConverterResponse {
+public class CurrencyConverterApi {
 	private String date;
 	private String result;
 	private String success;
