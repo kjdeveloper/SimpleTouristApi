@@ -2,8 +2,8 @@ package jankowiak.kamil.email;
 
 import j2html.tags.ContainerTag;
 import jankowiak.kamil.enums.CountryForWeather;
-import jankowiak.kamil.mainService.NewsService;
-import jankowiak.kamil.mainService.WeatherService;
+import jankowiak.kamil.mainService.interfacesForMainService.NewsService;
+import jankowiak.kamil.mainService.interfacesForMainService.WeatherService;
 import jankowiak.kamil.model.DestinationCountry;
 import jankowiak.kamil.weatherModel.WeatherApi;
 
@@ -39,8 +39,8 @@ public class EmailService {
     }
 
     private String createInformationsAboutDestinationCountry(DestinationCountry destinationCountry) {
-        Map<String, URL> newsService = new NewsService().getMapWithInformationDetails(destinationCountry);
-        WeatherApi weatherService = new WeatherService().getWeatherInformation(CountryForWeather.valueOf(destinationCountry.getName()));
+        Map<String, URL> newsService = NewsService.getMapWithInformationDetails(destinationCountry);
+        WeatherApi weatherService = WeatherService.getWeatherInformation(CountryForWeather.valueOf(destinationCountry.getName()));
 
         List<String> listOfInformations = changeMapIntoInformations(newsService);
 

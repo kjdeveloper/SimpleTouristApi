@@ -3,6 +3,7 @@ package jankowiak.kamil.mainService;
 import jankowiak.kamil.currencyModel.CurrencyConverterApi;
 import jankowiak.kamil.enums.CountryForWeather;
 import jankowiak.kamil.jokeModel.JokeApi;
+import jankowiak.kamil.mainService.interfacesForMainService.*;
 import jankowiak.kamil.model.DestinationCountry;
 import jankowiak.kamil.model.Homeland;
 import jankowiak.kamil.weatherModel.WeatherApi;
@@ -15,11 +16,6 @@ import java.util.Scanner;
 
 public class MainService {
 
-    private static NewsService newsService = new NewsService();
-    private static WeatherService weatherService = new WeatherService();
-    private static CurrencyService currencyConverterService = new CurrencyService();
-    private static JokeService jokeService = new JokeService();
-    private static DestinationCountryInfoService destinationCountryInfoService = new DestinationCountryInfoService();
     private static Scanner sc = new Scanner(System.in);
 
     private Homeland homeland;
@@ -48,29 +44,29 @@ public class MainService {
 
     private WeatherApi getWeather(){
         System.out.println("Weather in " + destinationCountry.getName());
-        return weatherService.getWeatherInformation(CountryForWeather.valueOf(destinationCountry.getName()));
+        return WeatherService.getWeatherInformation(CountryForWeather.valueOf(destinationCountry.getName()));
     }
 
     private CurrencyConverterApi getCurrencyConverter(final BigDecimal amount){
         if (amount == null){
             amount.equals(BigDecimal.ONE);
         }
-        return currencyConverterService.getCurrencyConverter(homeland.getCountryForCurrencyConverter(), destinationCountry.getCountryForCurrencyConverter(), amount);
+        return CurrencyService.getCurrencyConverter(homeland.getCountryForCurrencyConverter(), destinationCountry.getCountryForCurrencyConverter(), amount);
     }
 
     private Map<String, URL> getNewsAboutDestinationCountry(){
         System.out.println("\nInformation from " + destinationCountry.getName() + " " + LocalDate.now() + "\n");
-        return newsService.getMapWithInformationDetails(destinationCountry);
+        return NewsService.getMapWithInformationDetails(destinationCountry);
     }
 
     private JokeApi getJoke(){
         System.out.println("\nJoke for today :)");
-        return jokeService.getJoke();
+        return JokeService.getJoke();
     }
 
     public void getAllInformationAboutDestinationCountry() {
 
-        /*
+
         WeatherApi weatherApi = getWeather();
         System.out.println(weatherApi.getData());
 
@@ -83,11 +79,11 @@ public class MainService {
         map.forEach((k, v) -> System.out.println(k + "\n" + v));
 
         JokeApi joke = getJoke();
-        System.out.println(joke);*/
+        System.out.println(joke);
 
 
 
-        /*System.out.println("Do you want to receive email with informations which you just read?");
+       /* System.out.println("Do you want to receive email with informations which you just read?");
         if (testForSendingEmail()){
             System.out.println("Please give me your email adress");
 

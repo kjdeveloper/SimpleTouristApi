@@ -1,7 +1,6 @@
-package jankowiak.kamil.mainService;
+package jankowiak.kamil.mainService.interfacesForMainService;
 
 import jankowiak.kamil.exceptions.MyException;
-import jankowiak.kamil.model.DestinationCountry;
 
 import java.net.ProxySelector;
 import java.net.URI;
@@ -10,7 +9,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-public class DestinationCountryInfoService implements IResponseForApi {
+public interface DestinationCountryInfoService extends IResponseForApi {
 
   /*  public String getInfoAboutDestinationCountry(DestinationCountry destinationCountry) {
         String destinationCountryAfterValidation = destinationCountryValidation(destinationCountry.getName());
@@ -28,8 +27,8 @@ public class DestinationCountryInfoService implements IResponseForApi {
         return destinationCountry;
     }
 
-    @Override
-    public HttpRequest requestGetForRapidApi(String path) {
+
+    static HttpRequest requestGetForRapidApi(String path) {
         HttpRequest httpRequest = null;
         try {
             httpRequest = HttpRequest.newBuilder()
@@ -44,8 +43,8 @@ public class DestinationCountryInfoService implements IResponseForApi {
         return httpRequest;
     }
 
-    @Override
-    public HttpResponse<String> getResponse(String path) {
+
+    static HttpResponse<String> getResponse(String path) {
         HttpResponse<String> httpResponse;
         try {
             httpResponse = HttpClient

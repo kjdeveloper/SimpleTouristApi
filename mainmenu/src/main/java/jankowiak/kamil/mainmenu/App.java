@@ -11,7 +11,7 @@ public class App {
     public static void main(String[] args) {
 
         Homeland homeland = new Homeland("POLAND", "Varsaw", CountryForCurrencyConverter.PLN);
-        DestinationCountry destinationCountry = new DestinationCountry("UNITED KINGDOM", "London", CountryForCurrencyConverter.GBP);
+        DestinationCountry destinationCountry = new DestinationCountry("UNITED_KINGDOM", "London", CountryForCurrencyConverter.GBP);
         MainService mainService = new MainService(homeland, destinationCountry);
 
         mainService.getAllInformationAboutDestinationCountry();

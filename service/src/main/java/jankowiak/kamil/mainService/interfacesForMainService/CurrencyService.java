@@ -1,4 +1,4 @@
-package jankowiak.kamil.mainService;
+package jankowiak.kamil.mainService.interfacesForMainService;
 
 import jankowiak.kamil.currencyModel.CurrencyConverterApi;
 import jankowiak.kamil.enums.CountryForCurrencyConverter;
@@ -12,10 +12,9 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-public class CurrencyService implements IResponseForApi {
+public interface CurrencyService extends IResponseForApi {
 
-    @Override
-    public HttpRequest requestGetForRapidApi(String path) {
+    static HttpRequest requestGetForRapidApi(String path) {
         HttpRequest httpRequest = null;
         try {
             httpRequest = HttpRequest.newBuilder()
@@ -30,8 +29,7 @@ public class CurrencyService implements IResponseForApi {
         return httpRequest;
     }
 
-    @Override
-    public HttpResponse<String> getResponse(String path) {
+    static HttpResponse<String> getResponse(String path) {
         HttpResponse<String> httpResponse;
         try {
             httpResponse = HttpClient
@@ -40,12 +38,12 @@ public class CurrencyService implements IResponseForApi {
                     .build()
                     .send(requestGetForRapidApi(path), HttpResponse.BodyHandlers.ofString());
         } catch (Exception e) {
-            throw new MyException("Something wrong with informations response");
+            throw new MyException("Something wrong with information response");
         }
         return httpResponse;
     }
 
-    public CurrencyConverterApi getCurrencyConverter(CountryForCurrencyConverter from, CountryForCurrencyConverter to, BigDecimal amount){
+    static CurrencyConverterApi getCurrencyConverter(CountryForCurrencyConverter from, CountryForCurrencyConverter to, BigDecimal amount){
         String pathForCurrencyConverter = "https://fixer-fixer-currency-v1.p.rapidapi.com/convert?from="+from.name()+"&to="+to.name()+"&amount="+amount;
         CurrencyConverterApi currencyConvert = null;
         try {

@@ -1,8 +1,7 @@
-package jankowiak.kamil.mainService;
+package jankowiak.kamil.mainService.interfacesForMainService;
 
-import jankowiak.kamil.enums.CountryForWeather;
 import jankowiak.kamil.exceptions.MyException;
-import jankowiak.kamil.weatherModel.WeatherApi;
+import jankowiak.kamil.jokeModel.JokeApi;
 
 import java.net.ProxySelector;
 import java.net.URI;
@@ -11,19 +10,18 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-public class WeatherService implements IResponseForApi {
+public interface JokeService extends IResponseForApi {
 
-    public WeatherApi getWeatherInformation(CountryForWeather countryForWeather) {
 
-        String pathForWeather = "https://weatherbit-v1-mashape.p.rapidapi.com/current?lang=en&lon=" + countryForWeather.getLongitude() + "&lat=" + countryForWeather.getLatitude() + "";
-        HttpResponse<String> weather = getResponse(pathForWeather);
+    static JokeApi getJoke() {
+        String pathForJoke = "https://jokeapi.p.rapidapi.com/category/Any?format=json4";
 
-        return gson.fromJson(weather.body(), WeatherApi.class);
-
+        HttpResponse<String> jokeResponse = getResponse(pathForJoke);
+        return gson.fromJson(jokeResponse.body(), JokeApi.class);
     }
 
-    @Override
-    public HttpRequest requestGetForRapidApi(String path) {
+
+    static HttpRequest requestGetForRapidApi(String path) {
         HttpRequest httpRequest = null;
         try {
             httpRequest = HttpRequest.newBuilder()
@@ -35,12 +33,10 @@ public class WeatherService implements IResponseForApi {
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
-
         return httpRequest;
     }
 
-    @Override
-    public HttpResponse<String> getResponse(String path) {
+    static HttpResponse<String> getResponse(String path) {
         HttpResponse<String> httpResponse;
         try {
             httpResponse = HttpClient
@@ -49,7 +45,7 @@ public class WeatherService implements IResponseForApi {
                     .build()
                     .send(requestGetForRapidApi(path), HttpResponse.BodyHandlers.ofString());
         } catch (Exception e) {
-            throw new MyException("Something wrong with weather response");
+            throw new MyException("Something wrong with informations response");
         }
         return httpResponse;
     }

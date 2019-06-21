@@ -1,4 +1,4 @@
-package jankowiak.kamil.mainService;
+package jankowiak.kamil.mainService.interfacesForMainService;
 
 import jankowiak.kamil.exceptions.MyException;
 import jankowiak.kamil.model.DestinationCountry;
@@ -16,13 +16,11 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class NewsService implements IResponseForApi {
+public interface NewsService extends IResponseForApi {
 
-    private Map<String, URL> mapWithInformationDetails;
-
-    public Map<String, URL> getMapWithInformationDetails(DestinationCountry destinationCountry) {
+    static Map<String, URL> getMapWithInformationDetails(DestinationCountry destinationCountry) {
         String pathWebNews = "https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/NewsSearchAPI?autoCorrect=true&pageNumber=1&pageSize=10&q=" + destinationCountry.getName() + "&safeSearch=false";
-
+        Map<String, URL> mapWithInformationDetails;
         try {
             HttpResponse<String> newsResponse = getResponse(pathWebNews);
             NewsApi news = gson.fromJson(newsResponse.body(), NewsApi.class);
@@ -41,13 +39,8 @@ public class NewsService implements IResponseForApi {
         return mapWithInformationDetails;
     }
 
-    @Override
-    public String toString() {
-        return mapWithInformationDetails + "\n";
-    }
 
-    @Override
-    public HttpRequest requestGetForRapidApi(String path) {
+    static HttpRequest requestGetForRapidApi(String path) {
         HttpRequest httpRequest = null;
         try {
             httpRequest = HttpRequest.newBuilder()
@@ -62,8 +55,8 @@ public class NewsService implements IResponseForApi {
         return httpRequest;
     }
 
-    @Override
-    public HttpResponse<String> getResponse(String path) {
+
+    static HttpResponse<String> getResponse(String path) {
         HttpResponse<String> httpResponse;
         try {
             httpResponse = HttpClient

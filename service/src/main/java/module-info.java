@@ -1,5 +1,6 @@
 module service {
     exports jankowiak.kamil.mainService;
+    exports jankowiak.kamil.mainService.interfacesForMainService;
 
     requires persistence;
     requires gson;
