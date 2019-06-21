@@ -38,9 +38,6 @@ public class MainService {
         return false;
     }
 
- /*   private DestinationINFOS getInformationsAboutDestinationCountry(){
-
-    }*/
 
     private WeatherApi getWeather(){
         System.out.println("Weather in " + destinationCountry.getName());
