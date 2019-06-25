@@ -29,16 +29,6 @@ public class MainService {
         this.destinationCountry = destinationCountry;
     }
 
-    private static boolean testForSendingEmail() {
-        System.out.println("\nWould you like to get an e-mail with the information you have just read? [yes/no]");
-        String answer = sc.next();
-        if (answer.equalsIgnoreCase("yes")) {
-            return true;
-        }
-        return false;
-    }
-
-
     private WeatherApi getWeather(){
         System.out.println("Weather in " + destinationCountry.getName());
         return WeatherService.getWeatherInformation(CountryForWeather.valueOf(destinationCountry.getName()));
@@ -78,13 +68,6 @@ public class MainService {
         JokeApi joke = getJoke();
         System.out.println(joke);
 
-
-
-       /* System.out.println("Do you want to receive email with informations which you just read?");
-        if (testForSendingEmail()){
-            System.out.println("Please give me your email adress");
-
-        }*/
     }
 }
 
